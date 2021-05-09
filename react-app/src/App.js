@@ -5,8 +5,8 @@ class Subject extends Component {
   render(){
     return(
       <header>
-        <h1>WEB</h1>
-        HTML5 Simentic 형식으로 일단 표현
+        <h1>{this.props.title}</h1>
+        {this.props.sub}
       </header>
     );
   }
@@ -30,8 +30,8 @@ class Content extends Component {
   render() {
     return (
       <article>
-        <h2>HTML</h2>
-        HTML은 프로그래밍 언어가 아닙니다!
+        <h2>{this.props.title}</h2>
+        {this.props.desc}
       </article>
     )
   }
@@ -41,9 +41,9 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Subject></Subject>
+        <Subject title="REACT" sub="For UI"></Subject>
         <TOC></TOC>
-        <Content></Content>
+        <Content title="HTML" desc="HTML은 프로그래밍 언어가 아닙니다!"></Content>
       </div>
     )
   }
