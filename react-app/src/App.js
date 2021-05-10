@@ -20,15 +20,35 @@ class App extends Component {
   }
 
   render() {
-    if(this.state.mode)
+    console.log('App render');
+    var _title, _desc = null;
+    if(this.state.mode === 'welcome') {
+      _title = this.state.welcome.title;
+      _desc = this.state.welcome.desc;
+    } else if(this.state.mode === 'read') {
+      _title = this.state.contents[0].title;
+      _desc = this.state.contents[0].desc
+    }
+    console.log('render', this);
     return (
       <div className="App">
-        <Subject 
+        {/* <Subject 
           title={this.state.subject.title} 
           sub={this.state.subject.sub}>
-        </Subject>
+        </Subject> */}
+        <header>
+          <h1><a href="/" onClick={function(e) {
+            console.log(e);
+            e.preventDefault();
+            // this.state.mode = 'welcome';
+            this.setState({
+              mode: 'read'
+            });
+          }.bind(this)}>{this.state.subject.title}</a></h1>
+          {this.state.subject.sub}
+        </header>
         <TOC data={this.state.contents}></TOC>
-        <Content title="HTML" desc="HTML은 프로그래밍 언어가 아닙니다!"></Content>
+        <Content title={_title} desc={_desc}></Content>
       </div>
     )
   }
