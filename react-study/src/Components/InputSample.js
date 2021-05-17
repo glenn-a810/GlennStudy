@@ -3,7 +3,7 @@
 // 변형된 값을 App.js에서 화면에 뿌려준다
 
 
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 
 function InputSample() {
     const [inputs, setInputs] = useState({
@@ -11,6 +11,7 @@ function InputSample() {
         phoneNumber: ''
     })
 
+    const nameInput = useRef()
     const {name, phoneNumber} = inputs; // 비구조화 할당을 통해 값 추출
 
     const onConvert = (e) => {
@@ -37,11 +38,13 @@ function InputSample() {
             name: '',
             phoneNumber: ''
         })
+
+        nameInput.current.focus()
     }
 
     return(
         <div>
-            <input name='name' placeholder="이름" onChange={onChange} value={name} />
+            <input name='name' placeholder="이름" onChange={onChange} value={name} ref={nameInput} />
             <input name='phoneNumber' placeholder="전화번호" onChange={onConvert} value={phoneNumber} />
             <button onClick={onReset}>초기화</button>
             <div>
