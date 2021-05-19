@@ -8,24 +8,24 @@ function User({user}) {
     )
 }
 
-function UserList() {
-    const users = [
-        {
-            id: 1,
-            username: 'Luwie',
-            email: 'luwie@a810.com'
-        },
-        {
-            id: 2,
-            username: 'Odd',
-            email: 'odd@a810.com'
-        },
-        {
-            id: 3,
-            username: 'Mir',
-            email: 'mir@a810.com'
-        }
-    ]
+function UserList({users}) {
+    // const users = [
+    //     {
+    //         id: 1,
+    //         username: 'Luwie',
+    //         email: 'luwie@a810.com'
+    //     },
+    //     {
+    //         id: 2,
+    //         username: 'Odd',
+    //         email: 'odd@a810.com'
+    //     },
+    //     {
+    //         id: 3,
+    //         username: 'Mir',
+    //         email: 'mir@a810.com'
+    //     }
+    // ]
 
     return(
         <div>
