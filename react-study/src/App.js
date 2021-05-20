@@ -52,10 +52,15 @@ function App() {
     nextId.current += 1
   }
 
+  const handleDelete = e => {
+    console.log(users)
+    setUsers(users.filter(user => user.id !== e.id))
+  }
+
   return(
     <>
       <CreateUser username={username} email={email} handleChange={handleChange} handleCreate={handleCreate} />
-      <UserList users={users} />
+      <UserList users={users} handleDelete={handleDelete} />
     </>
   )
 }
