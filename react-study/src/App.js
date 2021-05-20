@@ -2,15 +2,13 @@ import React, { useRef, useState } from 'react'
 import CreateUser from './Components/CreateUser'
 import UserList from './Components/UserList'
 
-
-
-function App({username, email}) {
+function App() {
   const [input, setInput] = useState({
     username: '',
     email: ''
   })
 
-  // const {username, email} = input
+  const {username, email} = input
   const handleChange = e => {
     const {name, value} = e.target
     setInput({
@@ -20,7 +18,7 @@ function App({username, email}) {
     console.log(e)
   }
 
-  const {users, setUsers} = useState([
+  const [users, setUsers] = useState([
     {
         id: 1,
         username: 'Luwie',
@@ -39,7 +37,6 @@ function App({username, email}) {
   ])
 
   const nextId = useRef(4)
-  //console.log(nextId)
   const handleCreate = () => {
     const user = {
       id: nextId.current,
