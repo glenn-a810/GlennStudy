@@ -1,18 +1,22 @@
 import React from 'react'
 
-function User({user, handleDelete}) {
+function User({user, handleDelete, handleToggle}) {
     return(
         <div>
-            <b>{user.username}</b> <span>({user.email})</span>
+            <b style={{
+                cursor: 'pointer',
+                color: user.active ? 'green' : 'black'
+            }} onClick={() => handleToggle(user)}>{user.username}</b>
+            <span>({user.email})</span>
             <button onClick={() => handleDelete(user)}>삭제</button>
         </div>
     )
 }
 
-function UserList({users, handleDelete}) {
+function UserList({users, handleDelete, handleToggle}) {
     return(
         <div>
-            {users.map(user => (<User user={user} key={user.id} handleDelete={handleDelete}/>))}
+            {users.map(user => (<User user={user} key={user.id} handleDelete={handleDelete} handleToggle={handleToggle} />))}
         </div>
     )
 }

@@ -22,17 +22,20 @@ function App() {
     {
         id: 1,
         username: 'Luwie',
-        email: 'luwie@a810.com'
+        email: 'luwie@a810.com',
+        active: true
     },
     {
         id: 2,
         username: 'Odd',
-        email: 'odd@a810.com'
+        email: 'odd@a810.com',
+        active: false
     },
     {
         id: 3,
         username: 'Mir',
-        email: 'mir@a810.com'
+        email: 'mir@a810.com',
+        active: false
     }
   ])
 
@@ -57,10 +60,17 @@ function App() {
     setUsers(users.filter(user => user.id !== e.id))
   }
 
+  const handleToggle = e => {
+    console.log(e.id)
+    setUsers(
+      users.map(user => user.id === e.id ? {...user, active: !user.active} : user)
+    )
+  }
+
   return(
     <>
       <CreateUser username={username} email={email} handleChange={handleChange} handleCreate={handleCreate} />
-      <UserList users={users} handleDelete={handleDelete} />
+      <UserList users={users} handleDelete={handleDelete} handleToggle={handleToggle} />
     </>
   )
 }
