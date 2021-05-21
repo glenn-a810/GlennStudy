@@ -1,0 +1,58 @@
+{
+    "status": "ok",
+    "totalResults": 4,
+    "articles": [
+      {
+        "source": {
+          "id": null,
+          "name": "Ohmynews.com"
+        },
+        "author": "류승연",
+        "title": "한 달 새 반 토막... '암호화폐 시즌2' 끝났을까",
+        "description": "지난 19일은 검은 수요일(Black Wednesday)이었습니다. 암호화폐 시장이 이용자들의 '패닉 셀링(Panic selling, 공포 투매)'로 휘청였기 때문입니다. 비트코인 가격은 지난 19일 밤 10시 9분께 3579만원을 기록하면서 24시간 전(4971만원) 대비 약 28% 떨어졌습니다. 이더리움 또한 36.11% 떨어진 227만 7000원을 기록했습니다.\n\n암호화폐의 급락은 일시적이었으나 하락은 그간의 '추세'이기도 했습니다. 21일 오후 3시 코…",
+        "url": "http://www.ohmynews.com/NWS_Web/View/at_pg.aspx?CNTN_CD=A0002745317",
+        "urlToImage": "http://ojsfile.ohmynews.com/CRI_T_IMG/2021/0521/A0002745317_T.jpg",
+        "publishedAt": "2021-05-21T11:18:20Z",
+        "content": "<table><tr><td></td></tr><tr><td>  17 .</td></tr><tr><td></td><td></td></tr>\r\n</table>19 (Black Wednesday). ' (Panic selling, )' . 19 10 9 3579 24 (4971) 28% . 36.11% 227 7000 .'' . 21 3 , 19%, 28% .… [+849 chars]"
+      },
+      {
+        "source": {
+          "id": null,
+          "name": "Inews24.com"
+        },
+        "author": "",
+        "title": "코인원, 비트코인 피자데이 기념 기프티콘 증정 이벤트",
+        "description": "코인원이 비트코인 피자데이를 기념해 진행하는 피자 기프티콘 증정 이벤트 홍보 이미지 가상자산(암호화폐) 거래소 코인원이 비트코인 피자데이",
+        "url": "http://www.inews24.com/view/1368953",
+        "urlToImage": "http://img.lb.inews24.com/facebookexternalhit/face/626x352/image_gisa/202105/1621568903911_1_124840.png",
+        "publishedAt": "2021-05-21T04:53:29Z",
+        "content": "[=]\r\n[24 ] () 21 .\r\n 22 31 10 . 100( 50, 50) .\r\n 2 , . .\r\n . 2010 5 22 1 2 .\r\n\" \" \" \" .\r\n/ (huropa@inews24.com)"
+      },
+      {
+        "source": {
+          "id": null,
+          "name": "Kbench.com"
+        },
+        "author": "godbless",
+        "title": "비트코인 시즌2 끝났다.. 美 재무부, 1만 달러 이상 거래 신고 의무화",
+        "description": "미국 재무부가 가상화폐 1만달러 이상 거래시 국세청 신고를 \n의무화한다.\n20일(현지시간) 외신에 따르면 미 재무부는 1만달러 이상의 가상화폐 \n거래 모두 국세청(IRS)에 신고하도록 하는 지침을 발표했다.\n이번 지침에는 현금 거래와 마찬가지로 공정 시장가치가 1만 \n달러 이상인 가상자산을 수령하는 사업자도 IRS에 신고해야 한다는 내용도 담겨있다. \n\n재무부는 \"가상화폐가 세금 탈루 등 다양한 불법 행위를 \n조장하고 있다\"고 설명했다. 재무부 규제 소식에 가…",
+        "url": "https://kbench.com/?q=node/221475",
+        "urlToImage": null,
+        "publishedAt": "2021-05-21T01:45:12Z",
+        "content": "<td>\r\n</td>"
+      },
+      {
+        "source": {
+          "id": null,
+          "name": "Inews24.com"
+        },
+        "author": "",
+        "title": "코빗, '비트코인 피자데이' 기념 고객 이벤트 진행",
+        "description": "코빗이 실시하는 '비트코인 피자데이' 이벤트 홍보 이미지 가상자산(암호화폐) 거래소 코빗이 '비트코인 피자데이' 기념 고객 이벤트를 실시한다고 21",
+        "url": "http://www.inews24.com/view/1368847",
+        "urlToImage": "http://img.lb.inews24.com/facebookexternalhit/face/626x352/image_gisa/202105/1621556836464_1_092726.png",
+        "publishedAt": "2021-05-21T00:33:20Z",
+        "content": ", ' ' \r\n' ' [=]\r\n[24 ] () ' ' 21 .\r\n 23 522 .\r\n 2010 5 22 . 1 2 . .\r\n .\r\n1 . 5 .\r\n 7 5 5 . .\r\n/ (huropa@inews24.com)\r\nCopyright(c) inews24.com. All Rights Reserved.Please read inews24s privacy policy… [+32 chars]"
+      }
+    ]
+  }
