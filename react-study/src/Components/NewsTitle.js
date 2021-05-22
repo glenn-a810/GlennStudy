@@ -1,9 +1,9 @@
 import React from 'react'
 
-function NewsTitle() {
+function NewsTitle({title}) {
     return(
         <div>
-            <h1 align='center'><b>뉴스검색</b></h1>
+            <h1 align='center'><b>{title}</b></h1>
             <hr/>
         </div>
     )

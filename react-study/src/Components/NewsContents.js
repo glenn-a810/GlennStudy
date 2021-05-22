@@ -6,6 +6,7 @@ function NewsContents({title, description, author}) {
             <h3>{title}</h3>
             <h5>{description}</h5>
             <h5>{author}</h5>
+            <hr/>
         </div>
     )
 }
