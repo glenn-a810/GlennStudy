@@ -19,7 +19,9 @@ function App() {
   }
   
   const newsDelete = () => {
-    setContent(content.filter(del => del.author === ''))
+    console.log('content[0] value is : ',content[0])
+    // setContent(content.filter(del => del.author === 'godbless'))
+    setContent(content.splice(0,content.length-1))
   }
 
   return(

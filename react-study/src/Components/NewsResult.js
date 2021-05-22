@@ -1,12 +1,10 @@
-import React, { useState } from 'react'
+import React from 'react'
 import NewsContents from './NewsContents'
 
-function NewsResult({content}) {
-    // const [resultContent, setResultContent] = useState(content)
-
+function NewsResult({content, newsDelete}) {
     console.log('content in NewsResult.js : ', content)
     console.log('content type : ', typeof(content))
-    // console.log('resultContent in NewsResult.js : ', resultContent)
+
     return(
         <div>
             {content.map((newscontent, index) => 
@@ -15,6 +13,7 @@ function NewsResult({content}) {
                     title={newscontent.title} 
                     description={newscontent.description} 
                     author={newscontent.author} 
+                    newsDelete={newsDelete}
             />)}
         </div>
     )
