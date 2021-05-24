@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 
-function User({user, handleDelete, handleToggle}) {
+const User = React.memo(function User({user, handleDelete, handleToggle}) {
     useEffect(() => {
         console.log('user 값이 설정됨')
         console.log(user)
@@ -14,12 +14,12 @@ function User({user, handleDelete, handleToggle}) {
             <b style={{
                 cursor: 'pointer',
                 color: user.active ? 'green' : 'black'
-            }} onClick={() => handleToggle(user)}>{user.username}</b>
+            }} onClick={() => handleToggle(user.id)}>{user.username}</b>
             <span>({user.email})</span>
-            <button onClick={() => handleDelete(user)}>삭제</button>
+            <button onClick={() => handleDelete(user.id)}>삭제</button>
         </div>
     )
-}
+})
 
 function UserList({users, handleDelete, handleToggle}) {
     return(
@@ -29,4 +29,4 @@ function UserList({users, handleDelete, handleToggle}) {
     )
 }
 
-export default UserList
+export default React.memo(UserList)

@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useRef, useState } from 'react'
+import React, { useCallback, useMemo, useReducer, useRef } from 'react'
 import CreateUser from './Components/CreateUser'
 import UserList from './Components/UserList'
 
@@ -7,79 +7,113 @@ function countActiveUsers(users) {
   return users.filter(user => user.active).length
 }
 
-function App() {
-    const [input, setInput] = useState({
-        username: '',
-        email: ''
-    })
-
-    const {username, email} = input
-    const handleChange = e => {
-        const {name, value} = e.target
-        setInput({
-            ...input,
-            [name]: value
-        })
+const InitialState = {
+  input: {
+    username: '',
+    email: ''
+  },
+  users: [
+    {
+      id: 1,
+      username: 'Luwie',
+      email: 'luwie@a810.com',
+      active: true
+    },
+    {
+      id: 2,
+      username: 'Odd',
+      email: 'odd@a810.com',
+      active: false
+    },
+    {
+      id: 3,
+      username: 'Mir',
+      email: 'mir@a810.com',
+      active: false
     }
+  ]
+}
 
-    const [users, setUsers] = useState([
-        {
-            id: 1,
-            username: 'Luwie',
-            email: 'luwie@a810.com',
-            active: true
-        },
-        {
-            id: 2,
-            username: 'Odd',
-            email: 'odd@a810.com',
-            active: false
-        },
-        {
-            id: 3,
-            username: 'Mir',
-            email: 'mir@a810.com',
-            active: false
+function reducer(state, action) {
+  switch(action.type) {
+    case 'CHANGE_INPUT':
+      return {
+        ...state,
+        input: {
+          ...state.input,
+          [action.name]: action.value
         }
-    ])
+      }
+    case 'CREATE_USER':
+      return {
+        input: InitialState.input,
+        users: state.users.concat(action.user)
+      }
+    case 'DELETE_USER':
+      return {
+        ...state,
+        users: state.users.filter(user => user.id !== action.id)
+      }
+    case 'TOGGLE_USER':
+      return {
+        ...state,
+        users: state.users.map(user => user.id === action.id ? {...user, active: !user.active} : user)
+      }
+    default:
+      return state
+  }
+}
 
-    const nextId = useRef(4)
-    const handleCreate = useCallback(() => {
-        const user = {
-            id: nextId.current,
-            username,
-            email
-        }
-        setUsers([...users, user])
+function App() {
+  const [state, dispatch] = useReducer(reducer, InitialState)
+  const nextId = useRef(4)
+  const {users} = state
+  const {username, email} = state.input
 
-        setInput({
-            username: '',
-            email: ''
-        })
-        nextId.current += 1
-    }, [users, username, email])
+  const handleChange = useCallback(e => {
+    const {name, value} = e.target
+    dispatch({
+      type: 'CHANGE_INPUT',
+      name,
+      value
+    })
+  }, [])
 
-    const handleDelete = useCallback( e => {
-        console.log(users)
-        setUsers(users.filter(user => user.id !== e.id))
-    }, [users])
+  const handleCreate = useCallback(() => {
+    dispatch({
+      type: 'CREATE_USER',
+      user: {
+        id: nextId.current,
+        username,
+        email
+      }
+    })
+    nextId.current += 1
+  }, [username, email])
 
-    const handleToggle = useCallback( e => {
-        console.log(e.id)
-        setUsers(
-            users.map(user => user.id === e.id ? {...user, active: !user.active} : user)
-        )
-    }, [users])
+  const handleDelete = useCallback(id => {
+    dispatch({
+      type: 'DELETE_USER',
+      id
+    })
+  }, [])
 
-    const count = useMemo(() => countActiveUsers(users), [users])
+  const handleToggle = useCallback(id => {
+    dispatch({
+      type: 'TOGGLE_USER',
+      id
+    })
+  }, [])
 
-    return(
-        <>
-        <CreateUser username={username} email={email} handleChange={handleChange} handleCreate={handleCreate} />
-        <UserList users={users} handleDelete={handleDelete} handleToggle={handleToggle} />
-        <div>활성화 된 users : {count}</div>
-        </>
-    )
+  const count = useMemo(() => countActiveUsers(users), [users])
+
+  return(
+    <>
+      <CreateUser username={username} email={email} handleChange={handleChange} handleCreate={handleCreate} />
+      <UserList users={users} handleDelete={handleDelete} handleToggle={handleToggle} />
+      <div>Active user : {count}</div>
+    </>
+  )
 }
 
 export default App

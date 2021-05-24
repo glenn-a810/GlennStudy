@@ -10,4 +10,4 @@ function CreateUser({username, email, handleChange, handleCreate}){
     )
 }
 
-export default CreateUser
+export default React.memo(CreateUser)
