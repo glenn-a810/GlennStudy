@@ -1,4 +1,4 @@
-import React, { useMemo, useRef, useState } from 'react'
+import React, { useCallback, useMemo, useRef, useState } from 'react'
 import CreateUser from './Components/CreateUser'
 import UserList from './Components/UserList'
 
@@ -44,7 +44,7 @@ function App() {
     ])
 
     const nextId = useRef(4)
-    const handleCreate = () => {
+    const handleCreate = useCallback(() => {
         const user = {
             id: nextId.current,
             username,
@@ -57,19 +57,19 @@ function App() {
             email: ''
         })
         nextId.current += 1
-    }
+    }, [users, username, email])
 
-    const handleDelete = e => {
+    const handleDelete = useCallback( e => {
         console.log(users)
         setUsers(users.filter(user => user.id !== e.id))
-    }
+    }, [users])
 
-    const handleToggle = e => {
+    const handleToggle = useCallback( e => {
         console.log(e.id)
         setUsers(
             users.map(user => user.id === e.id ? {...user, active: !user.active} : user)
         )
-    }
+    }, [users])
 
     const count = useMemo(() => countActiveUsers(users), [users])
 
