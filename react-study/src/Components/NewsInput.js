@@ -1,12 +1,10 @@
 import React from 'react'
 
-function NewsInput({newsSearch, content, newsDelete}) {
-    console.log('newsSearch in NewsInput.js : ', newsSearch)
-    console.log('content in NewsInput.js : ', content)
+function NewsInput({newsSearch, newsDelete}) {
     return(
         <div align='center'>
             <input/>&nbsp;
-            <button onClick={newsSearch}>검색</button>
+            <button onClick={newsSearch}>검색</button>&nbsp;
             <button onClick={newsDelete}>삭제</button>
             <hr/>
         </div>
