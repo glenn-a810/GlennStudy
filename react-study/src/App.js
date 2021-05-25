@@ -1,6 +1,7 @@
 import React, { useCallback, useMemo, useReducer, useRef } from 'react'
 import CreateUser from './Components/CreateUser'
 import UserList from './Components/UserList'
+import useInput from './Hooks/useInput'
 
 function countActiveUsers(users) {
   console.log("활성화 된 users 수를 세는중...")
@@ -68,16 +69,21 @@ function App() {
   const [state, dispatch] = useReducer(reducer, InitialState)
   const nextId = useRef(4)
   const {users} = state
-  const {username, email} = state.input
+  // const {username, email} = state.input
 
-  const handleChange = useCallback(e => {
-    const {name, value} = e.target
-    dispatch({
-      type: 'CHANGE_INPUT',
-      name,
-      value
-    })
-  }, [])
+  const [{username, email}, handleChange, reset] = useInput({
+    username: '',
+    email: ''
+  })
+
+  // const handleChange = useCallback(e => {
+  //   const {name, value} = e.target
+  //   dispatch({
+  //     type: 'CHANGE_INPUT',
+  //     name,
+  //     value
+  //   })
+  // }, [])
 
   const handleCreate = useCallback(() => {
     dispatch({
@@ -88,8 +94,9 @@ function App() {
         email
       }
     })
+    reset()
     nextId.current += 1
-  }, [username, email])
+  }, [username, email, reset])
 
   const handleDelete = useCallback(id => {
     dispatch({
