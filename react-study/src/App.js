@@ -9,10 +9,6 @@ function countActiveUsers(users) {
 }
 
 const InitialState = {
-  input: {
-    username: '',
-    email: ''
-  },
   users: [
     {
       id: 1,
@@ -37,14 +33,14 @@ const InitialState = {
 
 function reducer(state, action) {
   switch(action.type) {
-    case 'CHANGE_INPUT':
-      return {
-        ...state,
-        input: {
-          ...state.input,
-          [action.name]: action.value
-        }
-      }
+    // case 'CHANGE_INPUT':
+    //   return {
+    //     ...state,
+    //     input: {
+    //       ...state.input,
+    //       [action.name]: action.value
+    //     }
+    //   }
     case 'CREATE_USER':
       return {
         input: InitialState.input,
@@ -64,6 +60,8 @@ function reducer(state, action) {
       return state
   }
 }
+
+export const UserDispatch = React.createContext(null)
 
 function App() {
   const [state, dispatch] = useReducer(reducer, InitialState)
@@ -98,28 +96,28 @@ function App() {
     nextId.current += 1
   }, [username, email, reset])
 
-  const handleDelete = useCallback(id => {
-    dispatch({
-      type: 'DELETE_USER',
-      id
-    })
-  }, [])
+  // const handleDelete = useCallback(id => {
+  //   dispatch({
+  //     type: 'DELETE_USER',
+  //     id
+  //   })
+  // }, [])
 
-  const handleToggle = useCallback(id => {
-    dispatch({
-      type: 'TOGGLE_USER',
-      id
-    })
-  }, [])
+  // const handleToggle = useCallback(id => {
+  //   dispatch({
+  //     type: 'TOGGLE_USER',
+  //     id
+  //   })
+  // }, [])
 
   const count = useMemo(() => countActiveUsers(users), [users])
 
   return(
-    <>
+    <UserDispatch.Provider value={dispatch}>
       <CreateUser username={username} email={email} handleChange={handleChange} handleCreate={handleCreate} />
-      <UserList users={users} handleDelete={handleDelete} handleToggle={handleToggle} />
+      <UserList users={users} />
       <div>Active user : {count}</div>
-    </>
+    </UserDispatch.Provider>
   )
 }
 
