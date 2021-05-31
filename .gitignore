@@ -52,3 +52,10 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+
+# public 용 무시
+jsStudy/*
+react-app/*
+react-study/*
+reacttest/*
+styling-with-sass/*
