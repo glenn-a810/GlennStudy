@@ -11,7 +11,7 @@ function reducer(state, action) {
         case 'SUCCESS':
             return {
                 loading: false,
-                data: action.date,
+                data: action.data,
                 error: null
             }
         case 'ERROR':
@@ -25,7 +25,7 @@ function reducer(state, action) {
     }
 }
 
-function useAsync(callback, deps = []) {
+function useAsync(callback, deps = [], skip = false) {
     const [state, dispatch] = useReducer(reducer, {
         loading: false,
         data: null,
@@ -43,8 +43,10 @@ function useAsync(callback, deps = []) {
     }
 
     useEffect(() => {
+        if(skip) return
         fetchData()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint 설정을 다음 줄에서만 비활성화
+        // eslint-disable-next-line
     }, deps)
 
     return [state, fetchData]
