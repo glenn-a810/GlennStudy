@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import TodoItem from './TodoItem'
+import { InitTodo } from './TodoContext'
 
 const TodoListBlock = styled.div`
     flex: 1;
@@ -10,12 +11,29 @@ const TodoListBlock = styled.div`
 `
 
 function TodoList() {
+    // const dispatch = useTodoDispatch()
+    // const todoData = useTodoState()
+    const todoData = InitTodo()
+    // const [todoData, setTodoData] = useState([])
+
+    // useEffect(() => {
+    //     axios
+    //     .get('https://express-sample-anmcv.run.goorm.io/todos')
+    //     .then(({data}) => {
+    //         setTodoData(data)
+    //     })
+    // }, [])
+
     return(
         <TodoListBlock>
-            <TodoItem title='a' done={true} />
-            <TodoItem title='b' done={true} />
-            <TodoItem title='c' done={false} />
-            <TodoItem title='d' done={false} />
+            {todoData.map(todo => (
+                <TodoItem
+                    key={todo.id}
+                    id={todo.id}
+                    title={todo.title}
+                    done={todo.done}
+                />
+            ))}
         </TodoListBlock>
     )
 }
