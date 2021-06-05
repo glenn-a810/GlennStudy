@@ -33,8 +33,8 @@ const TodoheadBlock = styled.div`
 `
 
 function TodoHead() {
-    // const todos = useTodoState()
-    const todos = InitTodo()
+    const todos = useTodoState()
+    console.log('todos in TodoHead.js : ', todos)
     const undoneTask = todos.filter(todo => !todo.done)
 
     const today = new Date()

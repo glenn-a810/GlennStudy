@@ -7,18 +7,21 @@ const TodoDispatchContext = createContext()
 function todoReducer(state, action) {
     switch(action.type) {
         case 'INIT':
-            return InitTodo()
+            return action.data
         case 'CREATE':
-            return axios.post('https://express-sample-anmcv.run.goorm.io/todos', {
-                title: state.title,
-                done: state.done
-            })
+            // return console.log('case: CREATE state is ', action.todo)
+            return axios.post('https://express-sample-anmcv.run.goorm.io/todos', action.todo)
+            // return state.concat(action.todo)
         case 'TOGGLE':
-            return state.map(todo => 
-                todo.id === action.id ? {...todo, done: !todo.done} : todo
-            )
+            // return console.log('case: TOGGLE state is ', action.id)
+            return axios.put('https://express-sample-anmcv.run.goorm.io/todos', action.id)
+            // return state.map(todo => 
+            //     todo.id === action.id ? {...todo, done: !todo.done} : todo
+            // )
         case 'REMOVE':
-            return state.filter(todo => todo.id !== action.id)
+            // return console.log('case: REMOVE state is ', action.id)
+            return axios.delete('https://express-sample-anmcv.run.goorm.io/todos', action.id)
+            // return state.filter(todo => todo.id !== action.id)
         default:
             throw new Error(`todoReducer에 정의 되어있지 않은 타입: ${action.type}`)
     }
@@ -26,6 +29,14 @@ function todoReducer(state, action) {
 
 export function TodoProvider({children}) {
     const [state, dispatch] = useReducer(todoReducer, [])
+
+    useEffect(() => {
+        axios
+        .get('https://express-sample-anmcv.run.goorm.io/todos')
+        .then(({data}) => {
+            dispatch({type: 'INIT', data})
+        })
+    }, [dispatch])
 
     return(
         <TodoStateContext.Provider value={state}>
@@ -44,14 +55,14 @@ export function useTodoDispatch() {
     return useContext(TodoDispatchContext)
 }
 
-export function InitTodo() {
-    const [initData, setInitData] = useState([])
-    useEffect(() => {
-        axios
-            .get('https://express-sample-anmcv.run.goorm.io/todos')
-            .then(({ data }) => {
-                setInitData(data)
-            })
-    }, [])
-    return initData
-}
+// export function InitTodo() {
+//     const [initData, setInitData] = useState([])
+//     useEffect(() => {
+//         axios
+//             .get('https://express-sample-anmcv.run.goorm.io/todos')
+//             .then(({ data }) => {
+//                 setInitData(data)
+//             })
+//     }, [])
+//     return initData
+// }

@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import TodoItem from './TodoItem'
-import { InitTodo } from './TodoContext'
+import { useTodoState } from './TodoContext'
 
 const TodoListBlock = styled.div`
     flex: 1;
@@ -12,8 +12,9 @@ const TodoListBlock = styled.div`
 
 function TodoList() {
     // const dispatch = useTodoDispatch()
-    // const todoData = useTodoState()
-    const todoData = InitTodo()
+    const todoData = useTodoState()
+    console.log('todoData in TodoList.js : ', todoData)
+    // const todoData = InitTodo()
     // const [todoData, setTodoData] = useState([])
 
     // useEffect(() => {
