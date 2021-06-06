@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import styled, { css } from 'styled-components'
 import { MdAdd } from 'react-icons/md'
-import { useTodoDispatch } from './TodoContext'
+import { useTodoDispatch, useTodoNextId, postTodos } from './TodoContext'
 
 const CircleButton = styled.button`
     background: #38d9a9;
@@ -80,21 +80,24 @@ function TodoCreate() {
     const [value, setValue] = useState('')
 
     const dispatch = useTodoDispatch()
+    const nextId = useTodoNextId()
     
     const handleToggle = () => setOpen(!open)
     const handleChange = e => setValue(e.target.value)
     const handleSubmit = e => {
         e.preventDefault()
-        dispatch({
-            type: 'CREATE',
-            todo: {
-                id: value.id,
-                title: value,
-                done: false
-            }
-        })
+        // dispatch({
+        //     type: 'CREATE',
+        //     todo: {
+        //         id: value.id,
+        //         title: value,
+        //         done: false
+        //     }
+        // })
+        postTodos(dispatch, value.id, value, false)
         setValue('')
         setOpen(false)
+        nextId.current += 1
     }
 
     return(

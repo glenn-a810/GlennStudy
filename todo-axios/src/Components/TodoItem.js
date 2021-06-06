@@ -1,7 +1,7 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
 import { MdDone, MdDelete } from 'react-icons/md'
-import { useTodoDispatch } from './TodoContext'
+import { deleteTodos, putTodos, useTodoDispatch } from './TodoContext'
 
 const Remove = styled.div`
     display: flex;
@@ -63,8 +63,16 @@ const Text = styled.div`
 
 function TodoItem({id, title, done}) {
     const dispatch = useTodoDispatch()
-    const handleToggle = () => dispatch({type: 'TOGGLE', id})
-    const handleRemove = () => dispatch({type: 'REMOVE', id})
+    // const handleToggle = () => dispatch({type: 'TOGGLE'})
+    // const handleRemove = () => dispatch({type: 'REMOVE', id})
+    // const handleRemove = deleteTodos(dispatch)
+    const handleToggle = () => {
+        putTodos(dispatch, id)
+    }
+
+    const handleRemove = () => {
+        deleteTodos(dispatch, id)
+    }
 
     return(
         <TodoItemBlock>

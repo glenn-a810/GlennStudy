@@ -1,4 +1,5 @@
 {
+  "proxy": "https://express-sample-anmcv.run.goorm.io",
   "name": "todo-axios",
   "version": "0.1.0",
   "private": true,

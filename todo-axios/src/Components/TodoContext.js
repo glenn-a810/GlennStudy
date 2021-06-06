@@ -1,31 +1,22 @@
 import axios from 'axios'
-import React, { createContext, useContext, useEffect, useReducer } from 'react'
+import React, { createContext, useContext, useReducer, useRef } from 'react'
 
 const TodoStateContext = createContext()
 const TodoDispatchContext = createContext()
+const TodoNextIdContext = createContext()
 
 function todoReducer(state, action) {
     switch(action.type) {
         case 'INIT':
             return action.data
         case 'CREATE':
-            // return console.log('case: CREATE state is ', state)
-            return axios
-                .post('https://express-sample-anmcv.run.goorm.io/todos', action.todo)
-                .then(() => {
-                    state.concat(action.todo)
-                })
-            // return state.concat(action.todo)
+            return state.concat(action.todo)
         case 'TOGGLE':
-            // return console.log('case: TOGGLE state is ', action.id)
-            return axios.put('https://express-sample-anmcv.run.goorm.io/todos', action.id)
-            // return state.map(todo => 
-            //     todo.id === action.id ? {...todo, done: !todo.done} : todo
-            // )
+            return state.map(todo => 
+                todo.id === action.id ? {...todo, done: !todo.done} : todo
+            )
         case 'REMOVE':
-            // return console.log('case: REMOVE state is ', action.id)
-            return axios.delete('https://express-sample-anmcv.run.goorm.io/todos', action.id)
-            // return state.filter(todo => todo.id !== action.id)
+            return state.filter(todo => todo.id !== action.id)
         default:
             throw new Error(`todoReducer에 정의 되어있지 않은 타입: ${action.type}`)
     }
@@ -33,19 +24,14 @@ function todoReducer(state, action) {
 
 export function TodoProvider({children}) {
     const [state, dispatch] = useReducer(todoReducer, [])
-
-    useEffect(() => {
-        axios
-        .get('https://express-sample-anmcv.run.goorm.io/todos')
-        .then(({data}) => {
-            dispatch({type: 'INIT', data})
-        })
-    }, [])
+    const nextId = useRef(5)
 
     return(
         <TodoStateContext.Provider value={state}>
             <TodoDispatchContext.Provider value={dispatch}>
-                {children}
+                <TodoNextIdContext.Provider value={nextId}>
+                    {children}
+                </TodoNextIdContext.Provider>
             </TodoDispatchContext.Provider>
         </TodoStateContext.Provider>
     )
@@ -59,14 +45,36 @@ export function useTodoDispatch() {
     return useContext(TodoDispatchContext)
 }
 
-// export function InitTodo() {
-//     const [initData, setInitData] = useState([])
-//     useEffect(() => {
-//         axios
-//             .get('https://express-sample-anmcv.run.goorm.io/todos')
-//             .then(({ data }) => {
-//                 setInitData(data)
-//             })
-//     }, [])
-//     return initData
-// }
+export function useTodoNextId() {
+    return useContext(TodoNextIdContext)
+}
+
+export async function getTodos(dispatch) {
+    const response = await axios.get('/todos')
+    dispatch({type: 'INIT', data: response.data})
+}
+
+export async function postTodos(dispatch, id, title, done) {
+    await axios.post('/todos', {
+        title: title,
+        done: false
+    })
+    dispatch({
+        type: 'CREATE',
+        todo: {
+            id: id,
+            title: title,
+            done: done
+        }
+    })
+}
+
+export async function putTodos(dispatch, id) {
+    await axios.put('/todos',{todoId: id})
+    dispatch({type: 'TOGGLE', id: id})
+}
+
+export async function deleteTodos(dispatch, id) {
+    await axios.delete('/todos',{data: {todoId: id}})
+    dispatch({type: 'REMOVE', id: id})
+}

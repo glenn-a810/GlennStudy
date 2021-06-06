@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import TodoItem from './TodoItem'
-import { useTodoState } from './TodoContext'
+import { useTodoDispatch, useTodoState, getTodos } from './TodoContext'
 
 const TodoListBlock = styled.div`
     flex: 1;
@@ -13,23 +13,20 @@ const TodoListBlock = styled.div`
 function TodoList() {
     // const dispatch = useTodoDispatch()
     const todoData = useTodoState()
+    const dispatch = useTodoDispatch()
+
     console.log('todoData in TodoList.js : ', todoData)
     // const todoData = InitTodo()
     // const [todoData, setTodoData] = useState([])
-
-    // useEffect(() => {
-    //     axios
-    //     .get('https://express-sample-anmcv.run.goorm.io/todos')
-    //     .then(({data}) => {
-    //         setTodoData(data)
-    //     })
-    // }, [])
+    useEffect(() => {
+        getTodos(dispatch)
+    }, [dispatch])
 
     return(
         <TodoListBlock>
-            {todoData.map(todo => (
+            {todoData.map((todo, index) => (
                 <TodoItem
-                    key={todo.id}
+                    key={index}
                     id={todo.id}
                     title={todo.title}
                     done={todo.done}
