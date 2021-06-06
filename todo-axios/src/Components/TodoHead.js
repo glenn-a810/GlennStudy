@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { InitTodo, useTodoState } from './TodoContext'
+import { useTodoState } from './TodoContext'
 
 const TodoheadBlock = styled.div`
     padding-top: 48px;

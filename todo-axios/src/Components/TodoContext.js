@@ -1,5 +1,5 @@
 import axios from 'axios'
-import React, { createContext, useContext, useEffect, useReducer, useState } from 'react'
+import React, { createContext, useContext, useEffect, useReducer } from 'react'
 
 const TodoStateContext = createContext()
 const TodoDispatchContext = createContext()
@@ -9,8 +9,12 @@ function todoReducer(state, action) {
         case 'INIT':
             return action.data
         case 'CREATE':
-            // return console.log('case: CREATE state is ', action.todo)
-            return axios.post('https://express-sample-anmcv.run.goorm.io/todos', action.todo)
+            // return console.log('case: CREATE state is ', state)
+            return axios
+                .post('https://express-sample-anmcv.run.goorm.io/todos', action.todo)
+                .then(() => {
+                    state.concat(action.todo)
+                })
             // return state.concat(action.todo)
         case 'TOGGLE':
             // return console.log('case: TOGGLE state is ', action.id)
@@ -36,7 +40,7 @@ export function TodoProvider({children}) {
         .then(({data}) => {
             dispatch({type: 'INIT', data})
         })
-    }, [dispatch])
+    }, [])
 
     return(
         <TodoStateContext.Provider value={state}>
