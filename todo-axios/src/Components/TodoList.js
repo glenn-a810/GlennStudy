@@ -11,13 +11,9 @@ const TodoListBlock = styled.div`
 `
 
 function TodoList() {
-    // const dispatch = useTodoDispatch()
     const todoData = useTodoState()
     const dispatch = useTodoDispatch()
 
-    console.log('todoData in TodoList.js : ', todoData)
-    // const todoData = InitTodo()
-    // const [todoData, setTodoData] = useState([])
     useEffect(() => {
         getTodos(dispatch)
     }, [dispatch])
