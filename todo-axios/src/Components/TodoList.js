@@ -16,12 +16,13 @@ const Button = styled.button`
     color: #ffffff;
     border: none;
     border-radius: 0;
-    background-color: #20c997;
-    ${({ disabled }) =>
-    disabled &&
-    `
-    background-color: #efefef;
-    `}
+    background: #38d9a9;
+    &:hover {
+        background: #63e6be;
+    }
+    &:active {
+        background: #20c997;
+    }
 `
 
 const TodoListBlock = styled.div`
