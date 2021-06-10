@@ -96,7 +96,7 @@ export async function authTodos(accountData) {
                 console.log(response)
                 sessionStorage.setItem('token', response.data.data)
             } else {
-                sessionStorage.removeItem('token')
+                // sessionStorage.removeItem('token')
                 alert(response.data.message)
             }
         })

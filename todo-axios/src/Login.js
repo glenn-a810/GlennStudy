@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react'
 import { authTodos } from './Components/TodoContext'
-import { useHistory } from 'react-router'
+import { useHistory } from 'react-router-dom'
 
 function Login() {
     const history = useHistory()
@@ -27,7 +27,12 @@ function Login() {
         console.log('handleLogin state : ', account)
         await authTodos(account)
         // setAccount(account)
-        // history.push('/')
+        // history.push('/todos')
+        if(sessionStorage.getItem('token') === null) {
+            history.push('/')
+        } else {
+            history.push('/todos')
+        }
     }
 
     return(

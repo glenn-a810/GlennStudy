@@ -4,7 +4,8 @@
 
 import React, { useEffect, useState } from 'react'
 import { createGlobalStyle } from 'styled-components'
-import { TodoProvider } from './Components/TodoContext'
+import { TodoProvider, useTodoState } from './Components/TodoContext'
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import TodoCreate from './Components/TodoCreate'
 import TodoHead from './Components/TodoHead'
 import TodoList from './Components/TodoList'
@@ -22,33 +23,55 @@ const GlobalStyle = createGlobalStyle`
 `
 
 function App() {
-  const [isLogin, setIsLogin] = useState(false)
+  const [isLogin, setIsLogin] = useState()
 
   useEffect(() => {
     if(sessionStorage.getItem('token') === null) {
       console.log('토큰 값 없엉')
+      setIsLogin(false)
     } else {
       console.log('토큰값 있으니까 isLogin을 true로 변경가능')
       setIsLogin(true)
     }
   }, [])
 
-  if(isLogin) {
-    return(
-      <TodoProvider>
-        <GlobalStyle />
-        <TodoTemplate>
-          <TodoHead />
-          <TodoList />
-          <TodoCreate />
-        </TodoTemplate>
-      </TodoProvider>
-    )
-  } else {
-    return(
-      <Login />
-    )
-  }  
+  // if(isLogin) {
+  //   return(
+  //     <BrowserRouter>
+  //     <TodoProvider>
+  //       <GlobalStyle />
+  //         <TodoTemplate>
+  //           <TodoHead />
+  //           <TodoList />
+  //           <TodoCreate />
+  //         </TodoTemplate>
+  //     </TodoProvider>
+  //     </BrowserRouter>
+  //   )
+  // } else {
+  //   return(
+  //     <Login />
+  //   )
+  // }
+  return(
+    <BrowserRouter>
+    <Switch>
+      <Route path='/' exact component={Login} />
+
+      <Route path='/todos'>
+        <TodoProvider>
+          <GlobalStyle />
+            <TodoTemplate>
+              <TodoHead />
+              {/* {todoData ? <TodoList /> : '로딩중...'} */}
+              <TodoList />
+              <TodoCreate />
+            </TodoTemplate>
+        </TodoProvider>
+      </Route>
+    </Switch>
+    </BrowserRouter>
+  )
 }
 
 export default App
