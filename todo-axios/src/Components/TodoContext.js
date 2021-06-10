@@ -50,7 +50,12 @@ export function useTodoNextId() {
 }
 
 export async function getTodos(dispatch) {
-    const response = await axios.get('/todos')
+    const response = await axios.get('/todos', {
+        headers: {
+            Authorization: sessionStorage.getItem('token')
+        }
+    })
+    console.log(response)
     dispatch({type: 'INIT', data: response.data})
 }
 
@@ -58,7 +63,8 @@ export async function postTodos(dispatch, id, title, done) {
     await axios.post('/todos', {
         title: title,
         done: false
-    })
+    },
+    {headers: {Authorization: sessionStorage.getItem('token')}})
     dispatch({
         type: 'CREATE',
         todo: {
@@ -70,11 +76,28 @@ export async function postTodos(dispatch, id, title, done) {
 }
 
 export async function putTodos(dispatch, id) {
-    await axios.put('/todos',{todoId: id})
+    await axios.put('/todos', {todoId: id}, {headers: {Authorization: sessionStorage.getItem('token')}})
     dispatch({type: 'TOGGLE', id: id})
 }
 
 export async function deleteTodos(dispatch, id) {
-    await axios.delete('/todos',{data: {todoId: id}})
+    await axios.delete('/todos', {
+        data: {todoId: id},
+        headers: {Authorization: sessionStorage.getItem('token')}
+    })
     dispatch({type: 'REMOVE', id: id})
+}
+
+export async function authTodos(accountData) {
+    await axios
+        .post('/login', accountData)
+        .then(response => {
+            if(response.data.isSuccess === 1) {
+                console.log(response)
+                sessionStorage.setItem('token', response.data.data)
+            } else {
+                sessionStorage.removeItem('token')
+                alert(response.data.message)
+            }
+        })
 }

@@ -2,7 +2,7 @@
 // 매 요청 시 sessionStorage에 있는 토큰을 헤더에 추가
 // id: test@test.com | password: 1234
 
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { createGlobalStyle } from 'styled-components'
 import { TodoProvider } from './Components/TodoContext'
 import TodoCreate from './Components/TodoCreate'
@@ -23,6 +23,15 @@ const GlobalStyle = createGlobalStyle`
 
 function App() {
   const [isLogin, setIsLogin] = useState(false)
+
+  useEffect(() => {
+    if(sessionStorage.getItem('token') === null) {
+      console.log('토큰 값 없엉')
+    } else {
+      console.log('토큰값 있으니까 isLogin을 true로 변경가능')
+      setIsLogin(true)
+    }
+  }, [])
 
   if(isLogin) {
     return(

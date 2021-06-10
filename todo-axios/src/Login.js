@@ -1,8 +1,11 @@
 // userEmail, userPassword
 
 import React, { useState } from 'react'
+import { authTodos } from './Components/TodoContext'
+import { useHistory } from 'react-router'
 
-function Login(isLogin) {
+function Login() {
+    const history = useHistory()
     // input에서 입력된 값을 state에 저장
     const [account, setAccount] = useState({
         userEmail: '',
@@ -19,8 +22,12 @@ function Login(isLogin) {
     }
 
     // 로그인 버튼의 onClick 이벤트로 받아온 값을 보내기
-    const handleLogin = e => {
+    const handleLogin = async e => {
         e.preventDefault()
+        console.log('handleLogin state : ', account)
+        await authTodos(account)
+        // setAccount(account)
+        // history.push('/')
     }
 
     return(
