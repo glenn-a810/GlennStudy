@@ -2,9 +2,9 @@
 // 매 요청 시 sessionStorage에 있는 토큰을 헤더에 추가
 // id: test@test.com | password: 1234
 
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { createGlobalStyle } from 'styled-components'
-import { TodoProvider, useTodoState } from './Components/TodoContext'
+import { TodoProvider } from './Components/TodoContext'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import TodoCreate from './Components/TodoCreate'
 import TodoHead from './Components/TodoHead'
@@ -23,17 +23,17 @@ const GlobalStyle = createGlobalStyle`
 `
 
 function App() {
-  const [isLogin, setIsLogin] = useState()
+  // const [isLogin, setIsLogin] = useState()
 
-  useEffect(() => {
-    if(sessionStorage.getItem('token') === null) {
-      console.log('토큰 값 없엉')
-      setIsLogin(false)
-    } else {
-      console.log('토큰값 있으니까 isLogin을 true로 변경가능')
-      setIsLogin(true)
-    }
-  }, [])
+  // useEffect(() => {
+  //   if(sessionStorage.getItem('token') === null) {
+  //     console.log('토큰 값 없엉')
+  //     setIsLogin(false)
+  //   } else {
+  //     console.log('토큰값 있으니까 isLogin을 true로 변경가능')
+  //     setIsLogin(true)
+  //   }
+  // }, [])
 
   // if(isLogin) {
   //   return(
@@ -56,7 +56,13 @@ function App() {
   return(
     <BrowserRouter>
     <Switch>
-      <Route path='/' exact component={Login} />
+      {/* <Route path='/' exact component={Login} /> */}
+      <Route path='/' exact>
+        <TodoTemplate>
+          <GlobalStyle />
+          <Login />
+        </TodoTemplate>
+      </Route>
 
       <Route path='/todos'>
         <TodoProvider>

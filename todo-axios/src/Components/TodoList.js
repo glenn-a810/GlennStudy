@@ -2,6 +2,27 @@ import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import TodoItem from './TodoItem'
 import { useTodoDispatch, useTodoState, getTodos } from './TodoContext'
+import { useHistory } from 'react-router'
+
+const Button = styled.button`
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 49px;
+    display: block;
+    width: 100%;
+    height: 49px;
+    margin: 5px 0 7px;
+    cursor: pointer;
+    color: #ffffff;
+    border: none;
+    border-radius: 0;
+    background-color: #20c997;
+    ${({ disabled }) =>
+    disabled &&
+    `
+    background-color: #efefef;
+    `}
+`
 
 const TodoListBlock = styled.div`
     flex: 1;
@@ -10,16 +31,29 @@ const TodoListBlock = styled.div`
     overflow-y: auto;
 `
 
+function handleLogout() {
+    sessionStorage.removeItem('token')
+    window.location.reload()
+}
+
 function TodoList() {
     const todoData = useTodoState()
     const dispatch = useTodoDispatch()
+    const history = useHistory()
 
+    // /todos에서 token이 없을 때, login 화면으로 라우트
     useEffect(() => {
-        getTodos(dispatch)
-    }, [dispatch])
+        if(sessionStorage.getItem('token') === null) {
+            history.push('/')
+        } else {
+            getTodos(dispatch)
+        }
+        // getTodos(dispatch)
+    }, [history, dispatch])
 
     return(
         <TodoListBlock>
+            <Button onClick={handleLogout}>로그아웃</Button>
             {todoData.map((todo, index) => (
                 <TodoItem
                     key={index}
