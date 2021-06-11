@@ -69,7 +69,6 @@ function App() {
           <GlobalStyle />
             <TodoTemplate>
               <TodoHead />
-              {/* {todoData ? <TodoList /> : '로딩중...'} */}
               <TodoList />
               <TodoCreate />
             </TodoTemplate>

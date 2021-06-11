@@ -49,13 +49,14 @@ function TodoList() {
         } else {
             getTodos(dispatch)
         }
-        // getTodos(dispatch)
     }, [history, dispatch])
 
     return(
         <TodoListBlock>
             <Button onClick={handleLogout}>로그아웃</Button>
-            {todoData.map((todo, index) => (
+            {todoData.length === 0 ? 
+            <div>로딩중...</div> : 
+            todoData.map((todo, index) => (
                 <TodoItem
                     key={index}
                     id={todo.id}
