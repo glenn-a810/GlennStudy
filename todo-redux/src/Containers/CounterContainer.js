@@ -14,9 +14,10 @@ function CounterContainer() {
     //useDispatch는 redux store의 dispatch를 함수에서 사용할 수 있게 해주는 hook
     const dispatch = useDispatch()
     // 각 액션들을 dispatch
-    const handleIncrease = dispatch(increase())
-    const handleDecrease = dispatch(decrease())
-    const handleSetDiff = dispatch(setDiff(diff))
+    // 여기서 값을 대입하면 too much render에러 발생
+    const handleIncrease = () => dispatch(increase())
+    const handleDecrease = () => dispatch(decrease())
+    const handleSetDiff = diff => dispatch(setDiff(diff))
 
     return(
         <Counter
