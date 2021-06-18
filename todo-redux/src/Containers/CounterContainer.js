@@ -15,6 +15,7 @@ function CounterContainer() {
     const dispatch = useDispatch()
     // 각 액션들을 dispatch
     // 여기서 값을 대입하면 too much render에러 발생
+    // render과정에서 state를 변화시키는 함수가 있다면 리렌더링이 계속 일어나서 무한루프처럼 동작
     const handleIncrease = () => dispatch(increase())
     const handleDecrease = () => dispatch(decrease())
     const handleSetDiff = diff => dispatch(setDiff(diff))

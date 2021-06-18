@@ -46,7 +46,7 @@ function TodoList() {
     useEffect(() => {
         if(sessionStorage.getItem('token') === null) {
             history.push('/')
-        } else {
+        } else {           
             getTodos(dispatch)
         }
     }, [history, dispatch])
