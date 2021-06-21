@@ -16,7 +16,7 @@ export const toggleTodo = id => ({
 })
 
 const initialState = [{
-    id: 1,
+    id: 0,
     text: 'todo 모듈',
     done: false
 }]
