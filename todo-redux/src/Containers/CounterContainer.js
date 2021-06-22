@@ -1,5 +1,5 @@
 import React from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { shallowEqual, useDispatch, useSelector } from 'react-redux'
 import Counter from '../Components/Counter'
 import { increase, decrease, setDiff } from '../Modules/counter'
 
@@ -9,7 +9,7 @@ function CounterContainer() {
     const {number, diff} = useSelector(state => ({
         number: state.counter.number,
         diff: state.counter.diff
-    }))
+    }), shallowEqual)
 
     //useDispatch는 redux store의 dispatch를 함수에서 사용할 수 있게 해주는 hook
     const dispatch = useDispatch()
