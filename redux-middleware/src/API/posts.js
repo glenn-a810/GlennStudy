@@ -21,7 +21,7 @@ const post = [
 ]
 
 // post 목록을 가져오는 비동기 함수
-export const getPost = async () => {
+export const getPosts = async () => {
     await sleep(500)
     return post
 }

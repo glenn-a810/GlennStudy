@@ -1,9 +1,9 @@
 import React from 'react'
-import CounterContainer from './Containers/CounterContainer'
+import PostListContainer from './Containers/PostListContainer'
 
 function App() {
   return(
-    <CounterContainer />
+    <PostListContainer />
   )
 }
 

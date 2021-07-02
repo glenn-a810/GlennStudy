@@ -127,7 +127,7 @@ const initialState = {
 //     }
 // }
 
-export default function post(state = initialState, action) {
+export default function posts(state = initialState, action) {
     switch(action.type) {
         case GET_POSTS:
         case GET_POSTS_SUCCESS:
